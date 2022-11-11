@@ -1,0 +1,21 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "content": "This is task",
+      "state:": "NOTDONE",
+      "subtasks": [
+        {
+          "id": 1,
+          "content": "This is subtask",
+          "state": "DONE"
+        },
+        {
+          "id": 1,
+          "content": "This is subtask",
+          "state": "NOTDONE"
+        }
+      ]
+    }
+  ]
+}
