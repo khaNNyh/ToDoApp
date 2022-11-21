@@ -1,0 +1,74 @@
+{
+  "lists": [
+    {
+      "id": 1,
+      "name": "Listeczka"
+    },
+    {
+      "id": 2,
+      "name": "TeżListeczka"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "list_id": 1,
+      "tasks": [
+        {
+          "content": "This is task",
+          "state": "NOTDONE",
+          "subtasks": [
+            {
+              "id": 1,
+              "content": "This is subtask",
+              "state": "DONE"
+            },
+            {
+              "id": 2,
+              "content": "This is subtask",
+              "state": "NOTDONE"
+            },
+            {
+              "id": 3,
+              "content": "This is subtask",
+              "state": "NOTDONE"
+            }
+          ]
+        },
+        {
+          "content": "This is task",
+          "state": "NOTDONE",
+          "subtasks": [
+            {
+              "id": 1,
+              "content": "This is subtask",
+              "state": "DONE"
+            },
+            {
+              "id": 2,
+              "content": "This is subtask",
+              "state": "NOTDONE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "list_id": 2,
+      "tasks": [
+        {
+          "content": "This is task",
+          "state": "NOTDONE",
+          "subtasks": [
+            {
+              "id": 1,
+              "content": "This is subtask",
+              "state": "DONE"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

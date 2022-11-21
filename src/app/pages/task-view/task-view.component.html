@@ -4,28 +4,43 @@
       <h1 class="title has-text-primary">Lists</h1>
 
       <div class="list-menu">
-        <a class="list-menu-item is-active">
-          <p>Item</p>
-        </a>
-        <a class="list-menu-item">
-          <p>Item</p>
-        </a>
-        <a class="list-menu-item">
-          <p>Item</p>
-        </a>
+        <div
+          *ngFor="let list of dataFromLists; let i = index"
+          (click)="getAllTasksByListId(i + 1); setCurrentTaskList(i + 1)"
+          class="list-menu-item"
+        >
+          <p>{{ list.name }}</p>
+        </div>
       </div>
-      <button class="button is-primary">+ New list</button>
+      <button
+        class="button is-primary has-text-white"
+        routerLink="/new-list"
+        (click)="showData()"
+      >
+        + New list
+      </button>
     </div>
     <div class="task-list-container has-bg-light">
       <h1 class="title has-text-primary">Tasks</h1>
-      <div class="task active">
-        <p>This is task</p>
-      </div>
-      <div class="task">
-        <p>This is task</p>
-      </div>
-      <div class="task complete">
-        <p>This is task</p>
+      <div
+        *ngFor="let task of dataFromTasks.tasks; let i = index"
+        class="task-container"
+      >
+        <div
+          (click)="changeTaskState(task)"
+          [class.complete]="task.state === 'DONE'"
+          class="task"
+        >
+          <p>{{ task.content }}</p>
+        </div>
+        <div
+          (click)="changeSubtaskState(subtask)"
+          *ngFor="let subtask of task.subtasks"
+          [class.complete]="subtask.state === 'DONE'"
+          class="sub-task"
+        >
+          <p>{{ subtask.content }}</p>
+        </div>
       </div>
     </div>
   </div>
