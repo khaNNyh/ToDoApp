@@ -3,10 +3,28 @@
     <h1 class="title has-text-primary">Create a new list</h1>
     <div class="field has-addons">
       <div class="control">
-        <input class="input" type="text" placeholder="New list name" />
+        <form>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              class="input"
+              [formControl]="newListName"
+            />
+            <mat-error *ngIf="newListName.hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </form>
       </div>
       <div class="control">
-        <a class="button is-primary"> Add </a>
+        <button
+          class="button is-primary"
+          [disabled]="newListName.hasError('required')"
+          (click)="addNewList()"
+        >
+          Add
+        </button>
       </div>
     </div>
     <button class="button is-primary new-list-button" routerLink="/">
