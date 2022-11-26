@@ -10,12 +10,38 @@
           class="list-menu-item"
         >
           <p>{{ list.name }}</p>
-          <div class="list-menu-item-buttons">
+          <div
+            *ngIf="deleteModeIsOn === false && list.id !== deleteModeIsOnFor"
+            class="list-menu-item-buttons"
+          >
             <button mat-icon-button color="accent">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn">
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleteModeIsOn = true; deleteModeIsOnFor = i + 1"
+            >
               <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="deleteModeIsOn === true && list.id === deleteModeIsOnFor"
+            class="list-menu-item-buttons"
+          >
+            <button
+              (click)="deleteListById(list.id)"
+              mat-icon-button
+              color="warn"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              (click)="deleteModeIsOn = false"
+              mat-icon-button
+              color="accent"
+            >
+              <mat-icon>close</mat-icon>
             </button>
           </div>
         </div>

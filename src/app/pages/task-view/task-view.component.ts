@@ -12,6 +12,9 @@ export class TaskViewComponent implements OnInit, AfterViewInit {
   dataFromTasks!: any;
   dataFromLists!: any;
 
+  deleteModeIsOn = false;
+  deleteModeIsOnFor!: number;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -60,6 +63,14 @@ export class TaskViewComponent implements OnInit, AfterViewInit {
     } else {
       subtask.state = taskState.NOTDONE;
     }
+  }
+
+  deleteListById(id: number) {
+    this.http
+      .delete('http://localhost:3000/lists/' + String(id))
+      .subscribe(() =>
+        this.http.delete('http://localhost:3000/tasks/' + String(id))
+      );
   }
 
   showData() {
