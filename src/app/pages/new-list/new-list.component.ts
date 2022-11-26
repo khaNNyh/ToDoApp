@@ -30,6 +30,12 @@ export class NewListComponent implements OnInit {
       id: this.Lists.length + 1,
       name: this.newListName.value,
     };
+    const newListTaskData = {
+      id: this.Lists.length + 1,
+      list_id: this.Lists.length + 1,
+      tasks: [],
+    };
     this.http.post('http://localhost:3000/lists', newListData).subscribe();
+    this.http.post('http://localhost:3000/tasks', newListTaskData).subscribe();
   }
 }
