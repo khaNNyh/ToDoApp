@@ -69,7 +69,9 @@ export class TaskViewComponent implements OnInit, AfterViewInit {
     this.http
       .delete('http://localhost:3000/lists/' + String(id))
       .subscribe(() =>
-        this.http.delete('http://localhost:3000/tasks/' + String(id))
+        this.http
+          .delete('http://localhost:3000/tasks/' + String(id))
+          .subscribe(() => this.getTaskLists())
       );
   }
 

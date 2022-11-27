@@ -7,10 +7,6 @@
     {
       "id": 2,
       "name": "TeżListeczka"
-    },
-    {
-      "id": 3,
-      "name": "test"
     }
   ],
   "tasks": [
@@ -73,11 +69,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": 3,
-      "list_id": 3,
-      "tasks": []
     }
   ]
 }

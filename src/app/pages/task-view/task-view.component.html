@@ -11,7 +11,11 @@
         >
           <p>{{ list.name }}</p>
           <div
-            *ngIf="deleteModeIsOn === false && list.id !== deleteModeIsOnFor"
+            *ngIf="
+              (deleteModeIsOn === false && list.id !== deleteModeIsOnFor) ||
+              (deleteModeIsOn === true && list.id !== deleteModeIsOnFor) ||
+              (deleteModeIsOn === false && list.id === deleteModeIsOnFor)
+            "
             class="list-menu-item-buttons"
           >
             <button mat-icon-button color="accent">
