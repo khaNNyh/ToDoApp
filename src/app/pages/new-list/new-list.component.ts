@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-new-list',
@@ -13,29 +14,23 @@ import {
   styleUrls: ['./new-list.component.scss'],
 })
 export class NewListComponent implements OnInit {
-  constructor(private http: HttpClient, private _formBuilder: FormBuilder) {}
+  constructor(
+    private http: HttpClient,
+    private _formBuilder: FormBuilder,
+    private taskService: TaskService
+  ) {}
 
   newListName = new FormControl('', [Validators.required]);
 
   Lists!: any;
 
   ngOnInit(): void {
-    this.http
-      .get('http://localhost:3000/lists')
+    this.taskService
+      .getLists()
       .subscribe((response) => (this.Lists = response));
   }
 
   addNewList() {
-    const newListData = {
-      id: this.Lists.length + 1,
-      name: this.newListName.value,
-    };
-    const newListTaskData = {
-      id: this.Lists.length + 1,
-      list_id: this.Lists.length + 1,
-      tasks: [],
-    };
-    this.http.post('http://localhost:3000/lists', newListData).subscribe();
-    this.http.post('http://localhost:3000/tasks', newListTaskData).subscribe();
+    this.taskService.createList(this.newListName.value).subscribe();
   }
 }

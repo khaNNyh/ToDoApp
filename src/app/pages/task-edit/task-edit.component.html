@@ -1,0 +1,64 @@
+<div class="centered-content">
+  <div class="modal-box has-bg-light">
+    <h1 class="title has-text-primary">Edit task</h1>
+    <div class="field has-addons">
+      <div class="control">
+        <form>
+          <mat-form-field>
+            <input
+              matInput
+              type="text"
+              class="input"
+              [formControl]="newTaskName"
+            />
+            <mat-error *ngIf="newTaskName.hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <textarea
+              matInput
+              class="input"
+              type="text"
+              [formControl]="newTaskNote"
+            >
+            </textarea>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input
+              matInput
+              type="datetime"
+              class="input"
+              [matDatepicker]="picker"
+              [formControl]="newTaskDate"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle color="accent" matIconSuffix [for]="picker"
+              ><mat-icon color="accent" matDatepickerToggleIcon
+                >keyboard_arrow_down</mat-icon
+              ></mat-datepicker-toggle
+            >
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="control">
+        <button
+          class="button is-primary"
+          routerLink="/"
+          [disabled]="newTaskName.hasError('required')"
+          (click)="editTask()"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+    <button
+      class="button is-primary new-list-button"
+      [routerLink]="['/lists', this.currentParams.listId]"
+    >
+      Go Back
+    </button>
+  </div>
+</div>

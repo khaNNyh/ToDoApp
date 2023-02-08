@@ -2,84 +2,191 @@
   <div class="task-manager-container">
     <div class="sidebar">
       <h1 class="title has-text-primary">Lists</h1>
-
-      <div class="list-menu">
-        <div
-          *ngFor="let list of dataFromLists; let i = index"
-          (click)="getAllTasksByListId(i + 1); setCurrentTaskList(i + 1)"
-          class="list-menu-item"
-        >
-          <p>{{ list.name }}</p>
-          <div
-            *ngIf="
-              (deleteModeIsOn === false && list.id !== deleteModeIsOnFor) ||
-              (deleteModeIsOn === true && list.id !== deleteModeIsOnFor) ||
-              (deleteModeIsOn === false && list.id === deleteModeIsOnFor)
-            "
-            class="list-menu-item-buttons"
+      <mat-tab-group color="accent" dynamicHeight animationDuration="2000ms">
+        <mat-tab
+          ><ng-template mat-tab-label
+            ><mat-icon color="accent">work_outline</mat-icon></ng-template
           >
-            <button mat-icon-button color="accent">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              color="warn"
-              (click)="deleteModeIsOn = true; deleteModeIsOnFor = i + 1"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
+          <div class="list-menu">
+            <ng-container *ngFor="let list of dataFromLists; let i = index">
+              <div
+                *ngIf="list.done === false"
+                [routerLink]="['/lists', list._id]"
+                routerLinkActive="is-active"
+                class="list-menu-item"
+              >
+                <p>{{ list.title }}</p>
+                <div
+                  *ngIf="
+                    (deleteModeIsOn === false &&
+                      list._id !== deleteModeIsOnFor) ||
+                    (deleteModeIsOn === true &&
+                      list._id !== deleteModeIsOnFor) ||
+                    (deleteModeIsOn === false && list._id === deleteModeIsOnFor)
+                  "
+                  class="list-menu-item-buttons"
+                >
+                  <button
+                    *ngIf="currentParams.listId === list._id"
+                    mat-icon-button
+                    (click)="changeListState(list)"
+                  >
+                    <mat-icon>done_all</mat-icon>
+                  </button>
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                </div>
+                <div
+                  *ngIf="
+                    deleteModeIsOn === true && list._id === deleteModeIsOnFor
+                  "
+                  class="list-menu-item-buttons"
+                >
+                  <button
+                    (click)="deleteListById(list._id)"
+                    mat-icon-button
+                    color="warn"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  <button
+                    (click)="deleteModeIsOn = false"
+                    mat-icon-button
+                    color="accent"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+                <mat-menu #menu="matMenu">
+                  <button
+                    mat-menu-item
+                    color="accent"
+                    [routerLink]="['/edit-list', list._id]"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button
+                    mat-menu-item
+                    color="warn"
+                    (click)="
+                      deleteModeIsOn = true; deleteModeIsOnFor = list._id
+                    "
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-menu>
+              </div>
+            </ng-container>
           </div>
-          <div
-            *ngIf="deleteModeIsOn === true && list.id === deleteModeIsOnFor"
-            class="list-menu-item-buttons"
+          <button
+            class="button is-primary has-text-white"
+            routerLink="/new-list"
+            (click)="showData()"
           >
-            <button
-              (click)="deleteListById(list.id)"
-              mat-icon-button
-              color="warn"
-            >
-              <mat-icon>delete</mat-icon>
+            + New list
+          </button>
+        </mat-tab>
+        <mat-tab
+          ><ng-template mat-tab-label
+            ><mat-icon color="accent">done_all</mat-icon></ng-template
+          >
+          <div class="list-menu">
+            <ng-container *ngFor="let list of dataFromLists; let i = index">
+              <div
+                *ngIf="list.done === true"
+                [routerLink]="['/lists', list._id]"
+                routerLinkActive="is-active"
+                class="list-menu-item"
+              >
+                <p>{{ list.title }}</p>
+                <div
+                  *ngIf="
+                    (deleteModeIsOn === false &&
+                      list._id !== deleteModeIsOnFor) ||
+                    (deleteModeIsOn === true &&
+                      list._id !== deleteModeIsOnFor) ||
+                    (deleteModeIsOn === false && list._id === deleteModeIsOnFor)
+                  "
+                  class="list-menu-item-buttons"
+                >
+                  <button
+                    mat-icon-button
+                    *ngIf="currentParams.listId === list._id"
+                    (click)="changeListState(list)"
+                  >
+                    <mat-icon>work_outline</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    (click)="
+                      deleteModeIsOn = true; deleteModeIsOnFor = list._id
+                    "
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+                <div
+                  *ngIf="
+                    deleteModeIsOn === true && list._id === deleteModeIsOnFor
+                  "
+                  class="list-menu-item-buttons"
+                >
+                  <button
+                    (click)="deleteListById(list._id)"
+                    mat-icon-button
+                    color="warn"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  <button
+                    (click)="deleteModeIsOn = false"
+                    mat-icon-button
+                    color="accent"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="task-list-container has-bg-light">
+      <h1 class="title has-text-primary">Tasks</h1>
+      <div class="tasks-container">
+        <div
+          *ngFor="let task of dataFromTasks; let i = index"
+          class="task-container"
+        >
+          <div
+            (click)="changeTaskState(task)"
+            [class.complete]="task.done === true"
+            class="task"
+          >
+            <p>{{ task.title }}</p>
+            <button mat-icon-button (click)="deleteTask(task._id)">
+              <mat-icon color="warn">delete</mat-icon>
             </button>
             <button
-              (click)="deleteModeIsOn = false"
               mat-icon-button
-              color="accent"
+              [routerLink]="['/edit-task', currentParams.listId, task._id]"
             >
-              <mat-icon>close</mat-icon>
+              <mat-icon color="accent">edit</mat-icon>
             </button>
           </div>
         </div>
       </div>
       <button
-        class="button is-primary has-text-white"
-        routerLink="/new-list"
-        (click)="showData()"
+        *ngIf="currentParams.listId"
+        class="button is-primary add-task-btn"
+        mat-fab
+        (click)="addNewTask()"
       >
-        + New list
+        <mat-icon>add</mat-icon>
       </button>
-    </div>
-    <div class="task-list-container has-bg-light">
-      <h1 class="title has-text-primary">Tasks</h1>
-      <div
-        *ngFor="let task of dataFromTasks.tasks; let i = index"
-        class="task-container"
-      >
-        <div
-          (click)="changeTaskState(task)"
-          [class.complete]="task.state === 'DONE'"
-          class="task"
-        >
-          <p>{{ task.content }}</p>
-        </div>
-        <div
-          (click)="changeSubtaskState(subtask)"
-          *ngFor="let subtask of task.subtasks"
-          [class.complete]="subtask.state === 'DONE'"
-          class="sub-task"
-        >
-          <p>{{ subtask.content }}</p>
-        </div>
-      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="centered-content">
   <div class="modal-box has-bg-light">
-    <h1 class="title has-text-primary">Create a new list</h1>
+    <h1 class="title has-text-primary">Edit list</h1>
     <div class="field has-addons">
       <div class="control">
         <form>
@@ -18,17 +18,20 @@
         </form>
       </div>
       <div class="control">
-        <button
+        <!-- <button
           class="button is-primary"
           routerLink="/"
           [disabled]="newListName.hasError('required')"
-          (click)="addNewList()"
+          (click)="editList()"
         >
           Add
-        </button>
+        </button> -->
       </div>
     </div>
-    <button class="button is-primary new-list-button" routerLink="/">
+    <button
+      class="button is-primary new-list-button"
+      [routerLink]="'/lists/' + currentParams.listId"
+    >
       Go Back
     </button>
   </div>

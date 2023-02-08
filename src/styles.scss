@@ -2,11 +2,70 @@
 @import "main-styles";
 @import "node_modules/bulma/bulma";
 
-// html,
-// body {
-//   height: 100%;
-// }
-// body {
-//   margin: 0;
-//   font-family: Roboto, "Helvetica Neue", sans-serif;
-// }
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+app-new-list {
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding: 0;
+  }
+
+  .mat-form-field-wrapper {
+    padding: 0;
+  }
+
+  .mat-form-field-appearance-legacy {
+    padding: 0;
+  }
+
+  .mat-form-field-infix {
+    border-top: 0;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+    margin-top: 1.5rem;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    display: none;
+  }
+}
+
+app-task-view {
+  //overwriting default material styling
+  .sidebar {
+    .mat-tab-group {
+      height: -webkit-fill-available;
+    }
+    .mat-tab-body-wrapper {
+      height: -webkit-fill-available;
+    }
+    .mat-tab-label {
+      min-width: 50% !important;
+    }
+    .mat-tab-body {
+      position: absolute;
+    }
+    .mat-tab-body-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+}
