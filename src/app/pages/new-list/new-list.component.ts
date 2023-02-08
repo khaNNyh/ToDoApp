@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -16,11 +16,11 @@ import { TaskService } from 'src/app/services/task.service';
 export class NewListComponent implements OnInit {
   constructor(
     private http: HttpClient,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private taskService: TaskService
   ) {}
 
-  newListName = new FormControl('', [Validators.required]);
+  newListName = new UntypedFormControl('', [Validators.required]);
 
   Lists!: any;
 

@@ -7,8 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -24,13 +24,13 @@ import { TaskService } from 'src/app/services/task.service';
 export class TaskEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private taskService: TaskService
   ) {}
 
-  newTaskName = new FormControl('', [Validators.required]);
-  newTaskNote = new FormControl('');
-  newTaskDate = new FormControl('');
+  newTaskName = new UntypedFormControl('', [Validators.required]);
+  newTaskNote = new UntypedFormControl('');
+  newTaskDate = new UntypedFormControl('');
 
   task!: any;
   currentParams!: Params;
