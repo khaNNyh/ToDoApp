@@ -21,6 +21,10 @@
   background: #555;
 }
 
+.width100 {
+  width: -webkit-fill-available;
+}
+
 app-new-list {
   .mat-form-field-appearance-legacy .mat-form-field-wrapper {
     padding: 0;
@@ -50,22 +54,22 @@ app-new-list {
 app-task-view {
   //overwriting default material styling
   .sidebar {
-    .mat-tab-group {
-      height: -webkit-fill-available;
-    }
-    .mat-tab-body-wrapper {
-      height: -webkit-fill-available;
-    }
-    .mat-tab-label {
-      min-width: 50% !important;
-    }
-    .mat-tab-body {
-      position: absolute;
-    }
-    .mat-tab-body-content {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
+    // .mat-tab-group {
+    //   height: -webkit-fill-available;
+    // }
+    // .mat-tab-body-wrapper {
+    //   height: -webkit-fill-available;
+    // }
+    // .mat-tab-label {
+    //   min-width: 50% !important;
+    // }
+    // .mat-tab-body {
+    //   position: absolute;
+    // }
+    // .mat-tab-body-content {
+    //   display: flex;
+    //   flex-direction: column;
+    //   height: 100%;
+    // }
   }
 }

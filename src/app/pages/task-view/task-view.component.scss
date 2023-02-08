@@ -31,8 +31,10 @@
 
 .add-task-btn {
   position: absolute;
-  left: 36.5rem;
-  bottom: 0.4rem;
+  left: 32.5rem;
+  bottom: 35.5rem;
+  // left: 35.5rem;
+  // bottom: 1.2rem;
 }
 
 .task-list-container {
@@ -50,6 +52,11 @@
     overflow-y: auto;
   }
 
+  .task-action-buttons {
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+
   .task {
     padding: 0.75rem 1rem;
     border-radius: 5px;
@@ -62,6 +69,9 @@
     &:not(.complete) {
       &:hover {
         box-shadow: 0 0 0 5px #eeeeee;
+        .task-action-buttons {
+          opacity: 100%;
+        }
       }
 
       &.active {
@@ -109,6 +119,7 @@
   margin-top: 1.25rem;
   margin-bottom: 1rem;
   flex-grow: 1;
+  height: 25rem;
   overflow-y: auto;
 
   .list-menu-item {
@@ -122,13 +133,26 @@
     width: 100%;
     color: #5f5f5f;
     margin-bottom: 5px;
+    transition: all 0.2s ease;
+
+    .list-menu-item-buttons {
+      opacity: 0;
+      transition: all 0.2s ease;
+    }
 
     &:hover {
       background: $light;
+      .list-menu-item-buttons {
+        opacity: 100;
+      }
     }
     &.is-active {
+      transition: all 0.2s ease;
       background: #cff9ef;
       color: $dark-turqish;
+      .list-menu-item-buttons {
+        opacity: 100;
+      }
     }
   }
 

@@ -2,10 +2,10 @@
   <div class="task-manager-container">
     <div class="sidebar">
       <h1 class="title has-text-primary">Lists</h1>
-      <mat-tab-group color="accent" dynamicHeight animationDuration="2000ms">
+      <mat-tab-group color="primary" animationDuration="2000ms">
         <mat-tab
           ><ng-template mat-tab-label
-            ><mat-icon color="accent">work_outline</mat-icon></ng-template
+            ><mat-icon color="primary">work_outline</mat-icon></ng-template
           >
           <div class="list-menu">
             <ng-container *ngFor="let list of dataFromLists; let i = index">
@@ -41,7 +41,7 @@
                   *ngIf="
                     deleteModeIsOn === true && list._id === deleteModeIsOnFor
                   "
-                  class="list-menu-item-buttons"
+                  class="list-menu-item-delete-buttons"
                 >
                   <button
                     (click)="deleteListById(list._id)"
@@ -61,7 +61,7 @@
                 <mat-menu #menu="matMenu">
                   <button
                     mat-menu-item
-                    color="accent"
+                    color="primary"
                     [routerLink]="['/edit-list', list._id]"
                   >
                     <mat-icon>edit</mat-icon>
@@ -80,7 +80,7 @@
             </ng-container>
           </div>
           <button
-            class="button is-primary has-text-white"
+            class="button is-primary has-text-white width100"
             routerLink="/new-list"
             (click)="showData()"
           >
@@ -89,7 +89,7 @@
         </mat-tab>
         <mat-tab
           ><ng-template mat-tab-label
-            ><mat-icon color="accent">done_all</mat-icon></ng-template
+            ><mat-icon color="primary">done_all</mat-icon></ng-template
           >
           <div class="list-menu">
             <ng-container *ngFor="let list of dataFromLists; let i = index">
@@ -143,7 +143,7 @@
                   <button
                     (click)="deleteModeIsOn = false"
                     mat-icon-button
-                    color="accent"
+                    color="primary"
                   >
                     <mat-icon>close</mat-icon>
                   </button>
@@ -167,22 +167,23 @@
             class="task"
           >
             <p>{{ task.title }}</p>
-            <button mat-icon-button (click)="deleteTask(task._id)">
-              <mat-icon color="warn">delete</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              [routerLink]="['/edit-task', currentParams.listId, task._id]"
-            >
-              <mat-icon color="accent">edit</mat-icon>
-            </button>
+            <div class="task-action-buttons">
+              <button
+                mat-icon-button
+                [routerLink]="['/edit-task', currentParams.listId, task._id]"
+              >
+                <mat-icon color="primary">edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteTask(task._id)">
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <button
         *ngIf="currentParams.listId"
         class="button is-primary add-task-btn"
-        mat-fab
         (click)="addNewTask()"
       >
         <mat-icon>add</mat-icon>
