@@ -63,8 +63,31 @@
     margin-bottom: 0.1rem;
     transition: all 0.2s ease;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    .task-data-container {
+      display: flex;
+      flex-direction: row;
+      white-space: nowrap;
+      .task-data-title-date {
+        margin-right: 1rem;
+        flex-direction: column;
+        .date {
+          font-size: smaller;
+          opacity: 50%;
+        }
+      }
+      .note {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        align-self: center;
+        opacity: 75%;
+        max-width: 13rem;
+        font-size: small;
+      }
+    }
 
     &:not(.complete) {
       &:hover {

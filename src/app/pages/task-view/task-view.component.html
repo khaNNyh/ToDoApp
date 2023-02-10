@@ -65,6 +65,7 @@
                     [routerLink]="['/edit-list', list._id]"
                   >
                     <mat-icon>edit</mat-icon>
+                    <span>Edit</span>
                   </button>
                   <button
                     mat-menu-item
@@ -74,6 +75,7 @@
                     "
                   >
                     <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
                   </button>
                 </mat-menu>
               </div>
@@ -166,7 +168,22 @@
             [class.complete]="task.done === true"
             class="task"
           >
-            <p>{{ task.title }}</p>
+            <div class="task-data-container">
+              <div class="task-data-title-date">
+                <p>{{ task.title }}</p>
+                <p class="date">{{ task.dueDate | date : "MMM d, y, H:mm" }}</p>
+              </div>
+              <p
+                #note
+                class="note"
+                [matTooltipDisabled]="!task.note || note.offsetWidth < 207"
+                [matTooltip]="task.note ? task.note : 'test'"
+                matTooltipPosition="above"
+                matTooltipShowDelay="500"
+              >
+                {{ task.note }}
+              </p>
+            </div>
             <div class="task-action-buttons">
               <button
                 mat-icon-button

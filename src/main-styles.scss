@@ -10,6 +10,10 @@ $light: #f8f8f8;
 
 //Bulma
 
+.input:focus {
+  border-color: transparent !important;
+}
+
 $family-sans-serif: "Nunito", sans-serif;
 $primary: $turqish;
 $link: $light-turqish;

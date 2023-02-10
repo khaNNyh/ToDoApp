@@ -1,3 +1,4 @@
+import { SnackBarService } from './../shared/snack-bar.service';
 import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
@@ -11,6 +12,8 @@ import {
   UntypedFormControl,
   FormGroup,
   Validators,
+  FormControl,
+  FormBuilder,
 } from '@angular/forms';
 import { Params, ActivatedRoute } from '@angular/router';
 import { task } from 'src/app/models/task-model';
@@ -24,16 +27,18 @@ import { TaskService } from 'src/app/services/task.service';
 export class TaskEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private _formBuilder: UntypedFormBuilder,
-    private taskService: TaskService
+    private _formBuilder: FormBuilder,
+    private taskService: TaskService,
+    private snackBar: SnackBarService
   ) {}
 
-  newTaskName = new UntypedFormControl('', [Validators.required]);
-  newTaskNote = new UntypedFormControl('');
-  newTaskDate = new UntypedFormControl('');
+  newTaskName = new FormControl<string>('', [Validators.required]);
+  newTaskNote = new FormControl<string>('');
+  newTaskDate = new FormControl<Date | undefined>(undefined);
 
   task!: any;
   currentParams!: Params;
+  today: Date = new Date();
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -48,10 +53,23 @@ export class TaskEditComponent implements OnInit {
         responseTask = response;
         this.task = responseTask[0];
         this.newTaskName.setValue(this.task.title);
+        this.newTaskNote.setValue(this.task.note);
+        this.newTaskDate.setValue(this.task.dueDate);
       });
   }
 
   editTask() {
-    this.taskService.createList(this.newTaskName.value).subscribe();
+    let finalTask: any = {};
+    finalTask.title = this.newTaskName.value as string;
+    finalTask.note = this.newTaskNote.value as string;
+    finalTask.dueDate = this.newTaskDate.value as Date;
+
+    this.taskService
+      .patchTask(
+        this.currentParams.listId,
+        this.currentParams.taskId,
+        finalTask
+      )
+      .subscribe(() => this.snackBar.openOK('Edit successful'));
   }
 }

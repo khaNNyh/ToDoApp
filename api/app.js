@@ -33,6 +33,13 @@ app.get("/lists", (req, res) => {
   });
 });
 
+app.get("/lists/:id", (req, res) => {
+  //show one list
+  List.findOne({ _id: req.params.id }).then((list) => {
+    res.send(list);
+  });
+});
+
 app.post("/lists", (req, res) => {
   //create the list
   let title = req.body.title;

@@ -1,3 +1,4 @@
+import { LoginComponent } from './pages/login/login.component';
 import { NewListComponent } from './pages/new-list/new-list.component';
 import { EditListComponent } from './pages/edit-list/edit-list.component';
 import { TaskViewComponent } from './pages/task-view/task-view.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
     redirectTo: 'lists',
     pathMatch: 'full',
   },
+  { path: 'login', component: LoginComponent },
   { path: 'lists', component: TaskViewComponent },
   { path: 'lists/:listId', component: TaskViewComponent },
   { path: 'new-list', component: NewListComponent },

@@ -25,6 +25,10 @@
   width: -webkit-fill-available;
 }
 
+.makeFlex {
+  display: flex;
+}
+
 app-new-list {
   .mat-form-field-appearance-legacy .mat-form-field-wrapper {
     padding: 0;
@@ -48,6 +52,27 @@ app-new-list {
 
   .mat-form-field-appearance-legacy .mat-form-field-underline {
     display: none;
+  }
+}
+
+app-edit-list {
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
+}
+
+app-new-list {
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
+  }
+}
+
+app-edit-task {
+  .makeFlex {
+    margin-bottom: 22px;
+    .mat-mdc-form-field-subscript-wrapper {
+      height: 0;
+    }
   }
 }
 

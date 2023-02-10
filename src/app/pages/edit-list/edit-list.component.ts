@@ -1,7 +1,8 @@
+import { SnackBarService } from './../shared/snack-bar.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -12,25 +13,30 @@ import { TaskService } from 'src/app/services/task.service';
 export class EditListComponent implements OnInit {
   constructor(
     private http: HttpClient,
-    private _formBuilder: UntypedFormBuilder,
+    private _formBuilder: FormBuilder,
     private taskService: TaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: SnackBarService
   ) {}
 
-  newListName = new UntypedFormControl('', [Validators.required]);
+  newListName = new FormControl<string>('', [Validators.required]);
 
   currentParams!: Params;
-  Lists!: any;
+  list!: any;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => (this.currentParams = params));
 
     this.taskService
-      .getLists()
-      .subscribe((response: any) => (this.Lists = response));
+      .getList(this.currentParams.listId)
+      .subscribe((response: any) => {
+        (this.list = response), this.newListName.setValue(this.list.title);
+      });
   }
 
-  // EditList() {
-  //   this.taskService.patchList(this.newListName.value).subscribe();
-  // }
+  editList() {
+    this.taskService
+      .patchList(this.currentParams.listId, { title: this.newListName.value })
+      .subscribe(() => this.snackBar.openOK('Edit successful'));
+  }
 }

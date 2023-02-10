@@ -1,4 +1,5 @@
-import { ActivatedRoute, Params, RouterModule } from '@angular/router';
+import { SnackBarService } from './../shared/snack-bar.service';
+import { ActivatedRoute, Params } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
@@ -6,6 +7,7 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { list, task } from 'src/app/models/task-model';
 import { TaskService } from 'src/app/services/task.service';
@@ -15,7 +17,7 @@ import { TaskService } from 'src/app/services/task.service';
   templateUrl: './task-view.component.html',
   styleUrls: ['./task-view.component.scss'],
 })
-export class TaskViewComponent implements OnInit, OnChanges {
+export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
   currentTaskList = '';
   currentParams!: Params;
   dataFromTasks!: any;
@@ -27,7 +29,9 @@ export class TaskViewComponent implements OnInit, OnChanges {
   constructor(
     private http: HttpClient,
     private taskService: TaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: SnackBarService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,10 @@ export class TaskViewComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getTaskLists();
+  }
+
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges();
   }
 
   getTaskLists() {
@@ -109,6 +117,7 @@ export class TaskViewComponent implements OnInit, OnChanges {
 
   deleteListById(idList: string) {
     this.taskService.deleteList(idList).subscribe(() => {
+      this.snackBar.openOK('Deletion successful');
       this.taskService.deleteTasks(idList).subscribe({
         next: () => {
           this.getTaskLists(), (this.dataFromTasks = []);
@@ -127,7 +136,10 @@ export class TaskViewComponent implements OnInit, OnChanges {
   addNewTask() {
     this.taskService
       .createTask(this.currentParams.listId, 'New task')
-      .subscribe(() => this.getAllTasksByListId(this.currentParams.listId));
+      .subscribe(() => {
+        this.getAllTasksByListId(this.currentParams.listId),
+          this.snackBar.openOK('New task has been added!');
+      });
   }
 
   deleteTask(taskId: string) {

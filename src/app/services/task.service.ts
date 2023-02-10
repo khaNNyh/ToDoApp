@@ -13,6 +13,10 @@ export class TaskService {
     return this.webReqServ.get('lists');
   }
 
+  getList(idList: string) {
+    return this.webReqServ.get('lists/' + idList);
+  }
+
   createList(title: string) {
     return this.webReqServ.post('lists', { title });
   }

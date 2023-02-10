@@ -18,14 +18,14 @@
         </form>
       </div>
       <div class="control">
-        <!-- <button
-          class="button is-primary"
-          routerLink="/"
+        <button
+          class="button is-primary edit-button"
+          [routerLink]="'/lists/' + currentParams.listId"
           [disabled]="newListName.hasError('required')"
           (click)="editList()"
         >
-          Add
-        </button> -->
+          Edit
+        </button>
       </div>
     </div>
     <button
