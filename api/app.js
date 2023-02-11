@@ -5,7 +5,7 @@ const { mongoose } = require("./db/mongoose");
 
 const bodyParser = require("body-parser");
 
-const { List, Task } = require("./db/models");
+const { List, Task, User } = require("./db/models");
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
@@ -123,6 +123,58 @@ app.delete("/lists/:listId/tasks", (req, res) => {
   }).then((removedTaskDoc) => {
     res.send([]);
   });
+});
+
+app.post("/users", (req, res) => {
+  // User sign up
+
+  let body = req.body;
+  let newUser = new User(body);
+
+  newUser
+    .save()
+    .then(() => {
+      return newUser.createSession();
+    })
+    .then((refreshToken) => {
+      return newUser.generateAccessAuthToken().then((accessToken) => {
+        // access auth token generated successfully, now we return an object containing the auth tokens
+        return { accessToken, refreshToken };
+      });
+    })
+    .then((authTokens) => {
+      res
+        .header("x-refresh-token", authTokens.refreshToken)
+        .header("x-access-token", authTokens.accessToken)
+        .send(newUser);
+    })
+    .catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.post("/users/login", (req, res) => {
+  let email = req.body.email;
+  let password = req.body.password;
+
+  User.findByCredentials(email, password)
+    .then((user) => {
+      return user
+        .createSession()
+        .then((accessToken) => {
+          return user.generateAccessAuthToken().then((accessToken) => {
+            return { accessToken, refreshToken };
+          });
+        })
+        .then((authTokens) => {
+          res.header("x-refresh-token", authTokens.refreshToken);
+          res.header("x-access-token", authTokens.accessToken);
+          res.send(newUser);
+        });
+    })
+    .catch((e) => {
+      res.status(400).send(e);
+    });
 });
 
 app.listen(3000, () => {
