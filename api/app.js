@@ -6,6 +6,7 @@ const { mongoose } = require("./db/mongoose");
 const bodyParser = require("body-parser");
 
 const { List, Task, User } = require("./db/models");
+const { access } = require("fs");
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
@@ -24,6 +25,44 @@ app.use(function (req, res, next) {
   }
   next();
 });
+
+let verifySession = (req, res, next) => {
+  let refreshToken = req.header("x-refresh-token");
+  let _id = req.header("_id");
+  User.findByIdAndToken(_id, refreshToken)
+    .then((user) => {
+      if (!user) {
+        return Promise.reject({
+          error: "User not found",
+        });
+      }
+
+      req.user_id = user._id;
+      req.userObject = user;
+      req.refreshToken = refreshToken;
+
+      let isSessionValid = false;
+
+      user.sessions.forEach((session) => {
+        if (session.token === refreshToken) {
+          if (User.hasRefreshTokenExpired(session.expiresAt) === false) {
+            isSessionValid = true;
+          }
+        }
+      });
+
+      if (isSessionValid) {
+        next();
+      } else {
+        return Promise.reject({
+          error: "Refresh token has expired",
+        });
+      }
+    })
+    .catch((e) => {
+      res.status(401).send(e);
+    });
+};
 
 app.get("/lists", (req, res) => {
   // res.send("Hello world");
@@ -126,8 +165,6 @@ app.delete("/lists/:listId/tasks", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-  // User sign up
-
   let body = req.body;
   let newUser = new User(body);
 
@@ -138,15 +175,13 @@ app.post("/users", (req, res) => {
     })
     .then((refreshToken) => {
       return newUser.generateAccessAuthToken().then((accessToken) => {
-        // access auth token generated successfully, now we return an object containing the auth tokens
         return { accessToken, refreshToken };
       });
     })
     .then((authTokens) => {
-      res
-        .header("x-refresh-token", authTokens.refreshToken)
-        .header("x-access-token", authTokens.accessToken)
-        .send(newUser);
+      res.header("x-refresh-token", authTokens.refreshToken);
+      res.header("x-access-token", authTokens.accessToken);
+      res.send(newUser);
     })
     .catch((e) => {
       res.status(400).send(e);
@@ -161,7 +196,7 @@ app.post("/users/login", (req, res) => {
     .then((user) => {
       return user
         .createSession()
-        .then((accessToken) => {
+        .then((refreshToken) => {
           return user.generateAccessAuthToken().then((accessToken) => {
             return { accessToken, refreshToken };
           });
@@ -169,8 +204,19 @@ app.post("/users/login", (req, res) => {
         .then((authTokens) => {
           res.header("x-refresh-token", authTokens.refreshToken);
           res.header("x-access-token", authTokens.accessToken);
-          res.send(newUser);
+          res.send(user);
         });
+    })
+    .catch((e) => {
+      res.status(400).send(e);
+    });
+});
+
+app.get("/users/me/access-token", verifySession, (req, res) => {
+  req.userObject
+    .generateAccessAuthToken()
+    .then((accessToken) => {
+      res.header("x-access-token", accessToken).send({ accessToken });
     })
     .catch((e) => {
       res.status(400).send(e);
