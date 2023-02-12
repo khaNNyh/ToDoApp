@@ -156,9 +156,9 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-    <div class="task-list-container has-bg-light">
+    <div *ngIf="dataFromTasks" class="task-list-container has-bg-light">
       <h1 class="title has-text-primary">Tasks</h1>
-      <div class="tasks-container">
+      <div *ngIf="dataFromTasks.length !== 0" class="tasks-container">
         <div
           *ngFor="let task of dataFromTasks; let i = index"
           class="task-container"
@@ -198,6 +198,12 @@
           </div>
         </div>
       </div>
+      <div *ngIf="dataFromTasks.length === 0" class="tasks-container">
+        <h1 class="title no-task-txt">
+          <p>No tasks on this list.</p>
+          <p class="is-size-7">Try to add one via the button above</p>
+        </h1>
+      </div>
       <button
         *ngIf="currentParams.listId"
         class="button is-primary add-task-btn"
@@ -205,6 +211,9 @@
       >
         <mat-icon>add</mat-icon>
       </button>
+    </div>
+    <div *ngIf="!dataFromTasks" class="task-list-container has-bg-light">
+      <h1 class="title pick-list-txt">Pick list you would like to view.</h1>
     </div>
   </div>
 </div>
