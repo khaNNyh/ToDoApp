@@ -2,14 +2,29 @@
   <div class="login-box">
     <h1 class="title has-text-primary">Login</h1>
     <div class="field">
-      <input matInput type="email" placeholder="Email" />
+      <input
+        [formControl]="loginField"
+        matInput
+        type="email"
+        placeholder="Email"
+      />
     </div>
     <div class="field">
-      <input matInput type="password" placeholder="Password" />
+      <input
+        [formControl]="passwordField"
+        matInput
+        type="password"
+        placeholder="Password"
+      />
     </div>
     <div class="field is-pulled-right">
       <p class="control">
-        <button class="button is-success has-text-white">Login</button>
+        <button
+          class="button is-success has-text-white"
+          (click)="onLoginButtonClick()"
+        >
+          Login
+        </button>
       </p>
     </div>
   </div>
