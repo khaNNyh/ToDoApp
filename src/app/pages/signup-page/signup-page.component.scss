@@ -6,14 +6,18 @@
   height: 100%;
 }
 
-.login-box {
+.signup-box {
   border-radius: 5px;
   padding: 3rem;
   background: white;
 }
 
-.login-form {
+.signup-form {
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-text {
+  padding-top: 5rem;
 }

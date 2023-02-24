@@ -182,7 +182,7 @@
     }
     &.is-active {
       transition: all 0.2s ease;
-      background: #cff9ef;
+      background: $light-turqish;
       color: $dark-turqish;
       .list-menu-item-buttons {
         opacity: 100;
@@ -196,5 +196,12 @@
 
   .delete-sub-task-icon {
     color: red !important;
+  }
+
+  .task-reminder-2 {
+    color: rgb(50, 110, 0) !important;
+  }
+  .task-reminder-1 {
+    color: rgb(221, 57, 28) !important;
   }
 }

@@ -1,0 +1,43 @@
+<div class="centered-content">
+  <div class="signup-box">
+    <h1 class="title has-text-primary">Sign Up</h1>
+    <form class="signup-form">
+      <div class="signup-field">
+        <mat-form-field>
+          <mat-label>Your E-mail here</mat-label>
+          <input
+            [formControl]="loginField"
+            matInput
+            type="email"
+            placeholder="Email"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Your password here</mat-label>
+          <input
+            [formControl]="passwordField"
+            matInput
+            type="password"
+            placeholder="Password"
+          />
+        </mat-form-field>
+      </div>
+    </form>
+    <div class="field is-pulled-right">
+      <p class="control">
+        <button
+          class="button is-success has-text-white"
+          (click)="onSignUpButtonClick()"
+        >
+          Create an account
+        </button>
+      </p>
+    </div>
+    <div class="login-text">
+      <p>Already have an account?</p>
+      <a [routerLink]="'/login'">Click here</a>
+    </div>
+  </div>
+</div>

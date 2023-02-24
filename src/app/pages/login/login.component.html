@@ -1,22 +1,28 @@
 <div class="centered-content">
   <div class="login-box">
-    <h1 class="title has-text-primary">Login</h1>
-    <div class="field">
-      <input
-        [formControl]="loginField"
-        matInput
-        type="email"
-        placeholder="Email"
-      />
-    </div>
-    <div class="field">
-      <input
-        [formControl]="passwordField"
-        matInput
-        type="password"
-        placeholder="Password"
-      />
-    </div>
+    <h1 class="title has-text-primary">Access your account</h1>
+    <form class="login-form">
+      <mat-form-field>
+        <div>
+          <input
+            [formControl]="loginField"
+            matInput
+            type="email"
+            placeholder="Email"
+          />
+        </div>
+      </mat-form-field>
+      <mat-form-field>
+        <div>
+          <input
+            [formControl]="passwordField"
+            matInput
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+      </mat-form-field>
+    </form>
     <div class="field is-pulled-right">
       <p class="control">
         <button
@@ -26,6 +32,10 @@
           Login
         </button>
       </p>
+    </div>
+    <div>
+      <p>No account? No problem!</p>
+      <a [routerLink]="'/signup'">Sign up here</a>
     </div>
   </div>
 </div>

@@ -26,6 +26,8 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
   deleteModeIsOn = false;
   deleteModeIsOnFor!: number;
 
+  todaysDate = new Date();
+
   constructor(
     private http: HttpClient,
     private taskService: TaskService,
@@ -118,14 +120,9 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
   deleteListById(idList: string) {
     this.taskService.deleteList(idList).subscribe(() => {
       this.snackBar.openOK('Deletion successful');
-      this.taskService.deleteTasks(idList).subscribe({
-        next: () => {
-          this.getTaskLists(), (this.dataFromTasks = []);
-        },
-        error: (err) => {
-          this.getTaskLists(), (this.dataFromTasks = []);
-        },
-      });
+      // this.taskService.deleteTasks(idList).subscribe({
+      this.getTaskLists(), (this.dataFromTasks = []);
+      // });
     });
   }
 
@@ -158,5 +155,32 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
           String(subId)
       )
       .subscribe();
+  }
+
+  checkDate(taskDate: any) {
+    const classic = {
+      'font-size': 'smaller',
+      opacity: '50%',
+    };
+    const remind1 = {
+      'font-size': 'smaller',
+      opacity: '50%',
+      color: 'rgb(221, 57, 28)',
+    };
+    const remind2 = {
+      'font-size': 'smaller',
+      opacity: '50%',
+      color: 'rgb(50, 110, 0)',
+    };
+
+    const tempDays = new Date(taskDate);
+    const remaining = this.todaysDate.getDate() - tempDays.getDate();
+    // const remDays = (remaining / (1000 * 3600 * 24)) as number;
+    const remDays = remaining as number;
+    if (remDays <= 1) {
+      return remind1;
+    } else if (remDays <= 6) {
+      return remind2;
+    } else return classic;
   }
 }

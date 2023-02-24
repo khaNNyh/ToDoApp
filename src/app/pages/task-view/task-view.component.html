@@ -171,7 +171,9 @@
             <div class="task-data-container">
               <div class="task-data-title-date">
                 <p>{{ task.title }}</p>
-                <p class="date">{{ task.dueDate | date : "MMM d, y, H:mm" }}</p>
+                <p [ngStyle]="checkDate(task.dueDate)">
+                  {{ task.dueDate | date : "MMM d, y, H:mm" }}
+                </p>
               </div>
               <p
                 #note

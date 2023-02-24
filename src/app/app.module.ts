@@ -1,6 +1,7 @@
+import { WebRequestInterceptor } from './services/web-request.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +27,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { EditListComponent } from './pages/edit-list/edit-list.component';
 import { TaskEditComponent } from './pages/task-edit/task-edit.component';
 import { LoginComponent } from './pages/login/login.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +36,7 @@ import { LoginComponent } from './pages/login/login.component';
     EditListComponent,
     TaskEditComponent,
     LoginComponent,
+    SignupPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,13 @@ import { LoginComponent } from './pages/login/login.component';
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: WebRequestInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

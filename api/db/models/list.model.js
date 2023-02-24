@@ -12,6 +12,10 @@ const ListSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  _userId: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
 });
 
 const List = new mongoose.model("List", ListSchema);
