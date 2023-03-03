@@ -156,11 +156,18 @@
   height: 25rem;
   overflow-y: auto;
 
+  .list-menu-color {
+    position: absolute;
+    transform: rotate(90deg) scale(2.8);
+    left: -2rem;
+    border-radius: 50px;
+  }
+
   .list-menu-item {
     display: flex;
 
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px 0px 10px 15px;
     border-radius: 5px;
     justify-content: space-between;
 
@@ -169,7 +176,14 @@
     margin-bottom: 5px;
     transition: all 0.2s ease;
 
+    .list-menu-item-delete-buttons {
+      display: flex;
+      flex-direction: row;
+    }
+
     .list-menu-item-buttons {
+      display: flex;
+      flex-direction: row;
       opacity: 0;
       transition: all 0.2s ease;
     }
@@ -203,5 +217,31 @@
   }
   .task-reminder-1 {
     color: rgb(221, 57, 28) !important;
+  }
+
+  .list-menu-title-container {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .list-menu-title {
+    text-decoration: none;
+    text-align: center;
+    display: inline-block; /* important */
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+  }
+
+  .list-menu-item:hover {
+    .animation {
+      animation: scrolling linear 12s infinite 0.8s;
+    }
+  }
+
+  @keyframes scrolling {
+    to {
+      transform: translateX(-199%);
+    }
   }
 }

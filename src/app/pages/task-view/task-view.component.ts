@@ -8,6 +8,10 @@ import {
   OnInit,
   SimpleChanges,
   ChangeDetectorRef,
+  ViewChild,
+  ElementRef,
+  QueryList,
+  ViewChildren,
 } from '@angular/core';
 import { list, task } from 'src/app/models/task-model';
 import { TaskService } from 'src/app/services/task.service';
@@ -27,6 +31,24 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
   deleteModeIsOnFor!: number;
 
   todaysDate = new Date();
+
+  @ViewChildren('container') container!: QueryList<ElementRef>;
+  @ViewChildren('text') text!: QueryList<ElementRef>;
+
+  isTextTooLong(id: string) {
+    return (
+      (
+        this.text?.toArray().find((text) => text.nativeElement.id === id)
+          ?.nativeElement as HTMLElement
+      )?.offsetWidth >
+      (
+        this.container
+          ?.toArray()
+          .find((container) => container.nativeElement.id === id)
+          ?.nativeElement as HTMLElement
+      )?.offsetWidth
+    );
+  }
 
   constructor(
     private http: HttpClient,

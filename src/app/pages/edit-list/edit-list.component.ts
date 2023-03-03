@@ -20,6 +20,7 @@ export class EditListComponent implements OnInit {
   ) {}
 
   newListName = new FormControl<string>('', [Validators.required]);
+  colorCtr = new FormControl<string>('');
 
   currentParams!: Params;
   list!: any;
@@ -30,13 +31,18 @@ export class EditListComponent implements OnInit {
     this.taskService
       .getList(this.currentParams.listId)
       .subscribe((response: any) => {
-        (this.list = response), this.newListName.setValue(this.list.title);
+        (this.list = response),
+          this.newListName.setValue(this.list.title),
+          this.colorCtr.setValue(this.list.color ? this.list.color : '#ffffff');
       });
   }
 
   editList() {
     this.taskService
-      .patchList(this.currentParams.listId, { title: this.newListName.value })
+      .patchList(this.currentParams.listId, {
+        title: this.newListName.value,
+        color: this.colorCtr.value,
+      })
       .subscribe(() => this.snackBar.openOK('Edit successful'));
   }
 }

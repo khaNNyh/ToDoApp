@@ -25,6 +25,11 @@
     align-items: center;
   }
 
+  .color-field {
+    display: flex;
+    flex-direction: row;
+  }
+
   .edit-button {
     height: 56px;
   }

@@ -28,6 +28,18 @@
         </button>
       </div>
     </div>
+    <div>
+      <form>
+        <div class="field color-field">
+          <p>Color:</p>
+          <ngx-colors
+            ngx-colors-trigger
+            style="display: inline-block; margin: 5px"
+            [formControl]="colorCtr"
+          ></ngx-colors>
+        </div>
+      </form>
+    </div>
     <button
       class="button is-primary new-list-button"
       [routerLink]="'/lists/' + currentParams.listId"

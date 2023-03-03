@@ -12,6 +12,10 @@ const ListSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  color: {
+    type: String,
+    required: false,
+  },
   _userId: {
     type: mongoose.Types.ObjectId,
     required: true,

@@ -18,6 +18,7 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
+import { NgxColorsModule } from 'ngx-colors';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -57,6 +58,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    NgxColorsModule,
   ],
   providers: [
     {

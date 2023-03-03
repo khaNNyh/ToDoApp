@@ -15,7 +15,39 @@
                 routerLinkActive="is-active"
                 class="list-menu-item"
               >
-                <p>{{ list.title }}</p>
+                <mat-icon
+                  class="list-menu-color"
+                  *ngIf="
+                    list.color &&
+                    list.color !== '#ffffff' &&
+                    list.color !== 'rgb(255, 255, 255)' &&
+                    list.color !== 'hsl(0, 100%, 100%)'
+                  "
+                  [ngStyle]="{ color: list.color }"
+                  >maximize</mat-icon
+                >
+                <div
+                  #container
+                  [id]="list._id"
+                  class="list-menu-title-container"
+                >
+                  <p
+                    [id]="list._id"
+                    #text
+                    [class.animation]="isTextTooLong(list._id)"
+                    class="list-menu-title"
+                  >
+                    {{ list.title }}
+                  </p>
+                  <p
+                    [style.margin-left.px]="container.offsetWidth"
+                    [class.animation]="isTextTooLong(list._id)"
+                    *ngIf="isTextTooLong(list._id)"
+                    class="list-menu-title"
+                  >
+                    {{ list.title }}
+                  </p>
+                </div>
                 <div
                   *ngIf="
                     (deleteModeIsOn === false &&
@@ -53,7 +85,7 @@
                   <button
                     (click)="deleteModeIsOn = false"
                     mat-icon-button
-                    color="accent"
+                    color="primary"
                   >
                     <mat-icon>close</mat-icon>
                   </button>
@@ -101,7 +133,20 @@
                 routerLinkActive="is-active"
                 class="list-menu-item"
               >
-                <p>{{ list.title }}</p>
+                <mat-icon
+                  class="list-menu-color"
+                  *ngIf="
+                    list.color &&
+                    list.color !== '#ffffff' &&
+                    list.color !== 'rgb(255, 255, 255)' &&
+                    list.color !== 'hsl(0, 100%, 100%)'
+                  "
+                  [ngStyle]="{ color: list.color }"
+                  >maximize</mat-icon
+                >
+                <div class="blue-btn">
+                  <p class="list-menu-title">{{ list.title }}</p>
+                </div>
                 <div
                   *ngIf="
                     (deleteModeIsOn === false &&
