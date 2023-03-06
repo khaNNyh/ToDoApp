@@ -1,10 +1,10 @@
 <div class="centered-content">
   <div class="signup-box">
-    <h1 class="title has-text-primary">Sign Up</h1>
+    <h1 i18n="@@SignUp" class="title has-text-primary">Sign Up</h1>
     <form class="signup-form">
       <div class="signup-field">
         <mat-form-field>
-          <mat-label>Your E-mail here</mat-label>
+          <mat-label i18n="@@YourEmail">Your E-mail here</mat-label>
           <input
             [formControl]="loginField"
             matInput
@@ -15,7 +15,7 @@
       </div>
       <div>
         <mat-form-field>
-          <mat-label>Your password here</mat-label>
+          <mat-label i18n="@@YourPassword">Your password here</mat-label>
           <input
             [formControl]="passwordField"
             matInput
@@ -28,6 +28,7 @@
     <div class="field is-pulled-right">
       <p class="control">
         <button
+          i18n="@@CreateAcc"
           class="button is-success has-text-white"
           (click)="onSignUpButtonClick()"
         >
@@ -36,8 +37,8 @@
       </p>
     </div>
     <div class="login-text">
-      <p>Already have an account?</p>
-      <a [routerLink]="'/login'">Click here</a>
+      <p i18n="@@AlreadyHaveAcc">Already have an account?</p>
+      <a i18n="@@ClickHere" [routerLink]="'/login'">Click here</a>
     </div>
   </div>
 </div>

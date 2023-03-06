@@ -1,0 +1,31 @@
+{
+  "locale": "pl-PL",
+  "translations": {
+    "AccessAcc": "Uzyskaj dostęp do konta",
+    "Add": "Dodaj",
+    "AlreadyHaveAcc": "Już masz konto?",
+    "ClickHere": "Kliknij tutaj",
+    "Color": "Kolor:",
+    "CreateAcc": "Stwórz konto",
+    "CreateList": "Stwórz nową listę",
+    "Delete": "Usuń",
+    "Edit": "Edytuj",
+    "EditList": "Edytuj listę",
+    "EditTask": "Edytuj zadanie",
+    "FieldRequired": " To pole jest {$START_TAG_STRONG}wymagane{$CLOSE_TAG_STRONG}",
+    "GoBack": "Powrót",
+    "Lists": "Listy",
+    "Login": "Zaloguj",
+    "Logout'": "Wyloguj",
+    "NewList": "+ Nowa lista",
+    "NoAccNoProp": "Nie masz konta? Nie ma problemu!",
+    "NoTasks": "Na tej liście brakuje zadań.",
+    "PickList": "Wybierz listę do podglądu",
+    "SignUp": "Rejestracja",
+    "SignUpHere": "Zarejestruj się tutaj",
+    "Tasks": "Zadania",
+    "TryToAddViaButton": "Dodaj zadanie za pomocą przycisku powyżej",
+    "YourEmail": "Twój e-mail tutaj",
+    "YourPassword": "Twoje hasło tutaj"
+  }
+}

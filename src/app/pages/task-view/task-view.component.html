@@ -1,7 +1,20 @@
 <div class="centered-content">
   <div class="task-manager-container">
+    <button
+      matTooltip="Logout"
+      i18n-matTooltip="'@@Logout'"
+      [matTooltipPosition]="'above'"
+      [matTooltipShowDelay]="500"
+      [matTooltipHideDelay]="500"
+      mat-icon-button
+      class="logout-button"
+      (click)="logoutMe()"
+      color="warn"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
     <div class="sidebar">
-      <h1 class="title has-text-primary">Lists</h1>
+      <h1 class="title has-text-primary" i18n="@@Lists">Lists</h1>
       <mat-tab-group color="primary" animationDuration="2000ms">
         <mat-tab
           ><ng-template mat-tab-label
@@ -97,7 +110,7 @@
                     [routerLink]="['/edit-list', list._id]"
                   >
                     <mat-icon>edit</mat-icon>
-                    <span>Edit</span>
+                    <span i18n="@@Edit">Edit</span>
                   </button>
                   <button
                     mat-menu-item
@@ -107,7 +120,7 @@
                     "
                   >
                     <mat-icon>delete</mat-icon>
-                    <span>Delete</span>
+                    <span i18n="@@Delete">Delete</span>
                   </button>
                 </mat-menu>
               </div>
@@ -116,6 +129,7 @@
           <button
             class="button is-primary has-text-white width100"
             routerLink="/new-list"
+            i18n="@@NewList"
             (click)="showData()"
           >
             + New list
@@ -144,8 +158,27 @@
                   [ngStyle]="{ color: list.color }"
                   >maximize</mat-icon
                 >
-                <div class="blue-btn">
-                  <p class="list-menu-title">{{ list.title }}</p>
+                <div
+                  #container
+                  [id]="list._id"
+                  class="list-menu-title-container"
+                >
+                  <p
+                    [id]="list._id"
+                    #text
+                    [class.animation]="isTextTooLong(list._id)"
+                    class="list-menu-title"
+                  >
+                    {{ list.title }}
+                  </p>
+                  <p
+                    [style.margin-left.px]="container.offsetWidth"
+                    [class.animation]="isTextTooLong(list._id)"
+                    *ngIf="isTextTooLong(list._id)"
+                    class="list-menu-title"
+                  >
+                    {{ list.title }}
+                  </p>
                 </div>
                 <div
                   *ngIf="
@@ -202,7 +235,7 @@
       </mat-tab-group>
     </div>
     <div *ngIf="dataFromTasks" class="task-list-container has-bg-light">
-      <h1 class="title has-text-primary">Tasks</h1>
+      <h1 i18n="@@Tasks" class="title has-text-primary">Tasks</h1>
       <div *ngIf="dataFromTasks.length !== 0" class="tasks-container">
         <div
           *ngFor="let task of dataFromTasks; let i = index"
@@ -247,8 +280,10 @@
       </div>
       <div *ngIf="dataFromTasks.length === 0" class="tasks-container">
         <h1 class="title no-task-txt">
-          <p>No tasks on this list.</p>
-          <p class="is-size-7">Try to add one via the button above</p>
+          <p i18n="@@NoTasks">No tasks on this list.</p>
+          <p i18n="@@TryToAddViaButton" class="is-size-7">
+            Try to add one via the button above
+          </p>
         </h1>
       </div>
       <button
@@ -260,7 +295,9 @@
       </button>
     </div>
     <div *ngIf="!dataFromTasks" class="task-list-container has-bg-light">
-      <h1 class="title pick-list-txt">Pick list you would like to view.</h1>
+      <h1 i18n="@@PickList" class="title pick-list-txt">
+        Pick list you would like to view.
+      </h1>
     </div>
   </div>
 </div>

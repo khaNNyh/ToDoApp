@@ -1,5 +1,5 @@
 import { SnackBarService } from './../shared/snack-bar.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
@@ -32,6 +32,8 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
 
   todaysDate = new Date();
 
+  localStorage = localStorage;
+
   @ViewChildren('container') container!: QueryList<ElementRef>;
   @ViewChildren('text') text!: QueryList<ElementRef>;
 
@@ -54,6 +56,7 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
     private http: HttpClient,
     private taskService: TaskService,
     private route: ActivatedRoute,
+    private _route: Router,
     private snackBar: SnackBarService,
     private cdr: ChangeDetectorRef
   ) {}
@@ -77,6 +80,12 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
+  }
+
+  logoutMe() {
+    this.localStorage.removeItem('x-access-token');
+    this.localStorage.removeItem('x-refresh-token');
+    this._route.navigate(['/login']);
   }
 
   getTaskLists() {

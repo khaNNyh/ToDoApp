@@ -4,6 +4,10 @@
   "newProjectRoot": "projects",
   "projects": {
     "ToDoApp": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": { "pl-PL": "src/locale/messages.pl.json" }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,6 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["pl-PL"],
             "outputPath": "dist/to-do-app",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -1,6 +1,8 @@
 <div class="centered-content">
   <div class="login-box">
-    <h1 class="title has-text-primary">Access your account</h1>
+    <h1 i18n="@@AccessAcc" class="title has-text-primary">
+      Access your account
+    </h1>
     <form class="login-form">
       <mat-form-field>
         <div>
@@ -26,6 +28,7 @@
     <div class="field is-pulled-right">
       <p class="control">
         <button
+          i18n="@@Login"
           class="button is-success has-text-white"
           (click)="onLoginButtonClick()"
         >
@@ -34,8 +37,8 @@
       </p>
     </div>
     <div>
-      <p>No account? No problem!</p>
-      <a [routerLink]="'/signup'">Sign up here</a>
+      <p i18n="@@NoAccNoProp">No account? No problem!</p>
+      <a i18n="@@SignUpHere" [routerLink]="'/signup'">Sign up here</a>
     </div>
   </div>
 </div>

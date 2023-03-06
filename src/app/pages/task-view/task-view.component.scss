@@ -10,6 +10,7 @@
 
 .task-manager-container {
   display: flex;
+  position: relative;
   width: 100%;
   height: 100%;
   max-width: 1000px;
@@ -33,6 +34,12 @@
   position: absolute;
   left: 32.5rem;
   bottom: 36rem;
+}
+
+.logout-button {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
 }
 
 .task-list-container {

@@ -1,0 +1,31 @@
+{
+  "locale": "en-US",
+  "translations": {
+    "AccessAcc": " Access your account ",
+    "Add": " Add ",
+    "AlreadyHaveAcc": "Already have an account?",
+    "ClickHere": "Click here",
+    "Color": "Color:",
+    "CreateAcc": " Create an account ",
+    "CreateList": " Create a new list ",
+    "Delete": "Delete",
+    "Edit": "Edit",
+    "EditList": "Edit list",
+    "EditTask": "Edit task",
+    "FieldRequired": " This field is {$START_TAG_STRONG}required{$CLOSE_TAG_STRONG}",
+    "GoBack": " Go Back ",
+    "Lists": "Lists",
+    "Login": " Login ",
+    "Logout'": "Logout",
+    "NewList": " + New list ",
+    "NoAccNoProp": "No account? No problem!",
+    "NoTasks": "No tasks on this list.",
+    "PickList": " Pick list you would like to view. ",
+    "SignUp": "Sign Up",
+    "SignUpHere": "Sign up here",
+    "Tasks": "Tasks",
+    "TryToAddViaButton": " Try to add one via the button above ",
+    "YourEmail": "Your E-mail here",
+    "YourPassword": "Your password here"
+  }
+}

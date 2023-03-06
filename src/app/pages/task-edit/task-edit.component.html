@@ -1,6 +1,6 @@
 <div class="centered-content">
   <div class="modal-box has-bg-light">
-    <h1 class="title has-text-primary">Edit task</h1>
+    <h1 i18n="@@EditTask" class="title has-text-primary">Edit task</h1>
     <div class="field has-addons">
       <div class="control">
         <form>
@@ -12,7 +12,10 @@
                 class="input"
                 [formControl]="newTaskName"
               />
-              <mat-error *ngIf="newTaskName.hasError('required')">
+              <mat-error
+                i18n="@@FieldRequired"
+                *ngIf="newTaskName.hasError('required')"
+              >
                 This field is <strong>required</strong>
               </mat-error>
             </mat-form-field>
@@ -23,7 +26,7 @@
                 [disabled]="newTaskName.hasError('required')"
                 (click)="editTask()"
               >
-                Edit
+                <ng-container i18n="@@Edit">Edit</ng-container>
               </button>
             </div>
           </div>
@@ -57,6 +60,7 @@
     <button
       class="button is-primary new-list-button"
       [routerLink]="['/lists', this.currentParams.listId]"
+      i18n="@@GoBack"
     >
       Go Back
     </button>

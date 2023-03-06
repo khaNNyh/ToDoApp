@@ -1,6 +1,6 @@
 <div class="centered-content">
   <div class="modal-box has-bg-light">
-    <h1 class="title has-text-primary">Edit list</h1>
+    <h1 i18n="@@EditList" class="title has-text-primary">Edit list</h1>
     <div class="field has-addons">
       <div class="control">
         <form>
@@ -11,7 +11,10 @@
               class="input"
               [formControl]="newListName"
             />
-            <mat-error *ngIf="newListName.hasError('required')">
+            <mat-error
+              i18n="@@FieldRequired"
+              *ngIf="newListName.hasError('required')"
+            >
               This field is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -24,14 +27,14 @@
           [disabled]="newListName.hasError('required')"
           (click)="editList()"
         >
-          Edit
+          <ng-container i18n="@@Edit">Edit</ng-container>
         </button>
       </div>
     </div>
     <div>
       <form>
         <div class="field color-field">
-          <p>Color:</p>
+          <p i18n="@@Color">Color:</p>
           <ngx-colors
             ngx-colors-trigger
             style="display: inline-block; margin: 5px"
@@ -41,6 +44,7 @@
       </form>
     </div>
     <button
+      i18n="@@GoBack"
       class="button is-primary new-list-button"
       [routerLink]="'/lists/' + currentParams.listId"
     >
