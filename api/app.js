@@ -7,6 +7,14 @@ const jwt = require("jsonwebtoken");
 const { List, Task, User } = require("./db/models");
 const { access } = require("fs");
 
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+  windowMs: 10000,
+  max: 200,
+  message: "Too many requests from this IP, please try again",
+});
+app.use(limiter);
+
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

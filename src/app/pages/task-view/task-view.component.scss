@@ -42,6 +42,13 @@
   top: 0.5rem;
 }
 
+.open-close-button {
+  display: none;
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+}
+
 .task-list-container {
   display: flex;
   flex-direction: column;
@@ -250,5 +257,15 @@
     to {
       transform: translateX(-199%);
     }
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .sidebar {
+    width: 8rem;
+  }
+
+  .open-close-button {
+    display: inline-block;
   }
 }

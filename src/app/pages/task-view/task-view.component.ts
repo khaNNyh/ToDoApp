@@ -12,6 +12,9 @@ import {
   ElementRef,
   QueryList,
   ViewChildren,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewChecked,
 } from '@angular/core';
 import { list, task } from 'src/app/models/task-model';
 import { TaskService } from 'src/app/services/task.service';
@@ -21,7 +24,7 @@ import { TaskService } from 'src/app/services/task.service';
   templateUrl: './task-view.component.html',
   styleUrls: ['./task-view.component.scss'],
 })
-export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
+export class TaskViewComponent implements OnInit, OnChanges, AfterViewChecked {
   currentTaskList = '';
   currentParams!: Params;
   dataFromTasks!: any;
@@ -78,7 +81,7 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewInit {
     this.getTaskLists();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewChecked(): void {
     this.cdr.detectChanges();
   }
 
