@@ -21,7 +21,15 @@
       <mat-tab-group color="primary" animationDuration="2000ms">
         <mat-tab
           ><ng-template mat-tab-label
-            ><mat-icon color="primary">work_outline</mat-icon></ng-template
+            ><mat-icon
+              color="primary"
+              matTooltip="In-progress"
+              i18n-matTooltip="'@@Inprogress'"
+              [matTooltipPosition]="'above'"
+              [matTooltipShowDelay]="500"
+              [matTooltipHideDelay]="500"
+              >work_outline</mat-icon
+            ></ng-template
           >
           <div class="list-menu">
             <ng-container *ngFor="let list of dataFromLists; let i = index">
@@ -78,10 +86,23 @@
                     *ngIf="currentParams.listId === list._id"
                     mat-icon-button
                     (click)="changeListState(list)"
+                    matTooltip="Mark as done"
+                    i18n-matTooltip="'@@MarkAsDone'"
+                    [matTooltipPosition]="'above'"
+                    [matTooltipShowDelay]="500"
+                    [matTooltipHideDelay]="500"
                   >
                     <mat-icon>done_all</mat-icon>
                   </button>
-                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="menu"
+                    matTooltip="More"
+                    i18n-matTooltip="'@@More'"
+                    [matTooltipPosition]="'above'"
+                    [matTooltipShowDelay]="500"
+                    [matTooltipHideDelay]="500"
+                  >
                     <mat-icon>more_vert</mat-icon>
                   </button>
                 </div>
@@ -95,6 +116,11 @@
                     (click)="deleteListById(list._id)"
                     mat-icon-button
                     color="warn"
+                    matTooltip="Confirm deletion"
+                    i18n-matTooltip="'@@ConfirmDeletion'"
+                    [matTooltipPosition]="'above'"
+                    [matTooltipShowDelay]="500"
+                    [matTooltipHideDelay]="500"
                   >
                     <mat-icon>delete</mat-icon>
                   </button>
@@ -102,6 +128,11 @@
                     (click)="deleteModeIsOn = false"
                     mat-icon-button
                     color="primary"
+                    matTooltip="Close"
+                    i18n-matTooltip="'@@Close'"
+                    [matTooltipPosition]="'above'"
+                    [matTooltipShowDelay]="500"
+                    [matTooltipHideDelay]="500"
                   >
                     <mat-icon>close</mat-icon>
                   </button>
@@ -140,7 +171,15 @@
         </mat-tab>
         <mat-tab
           ><ng-template mat-tab-label
-            ><mat-icon color="primary">done_all</mat-icon></ng-template
+            ><mat-icon
+              color="primary"
+              matTooltip="Done"
+              i18n-matTooltip="@@Done"
+              [matTooltipPosition]="'above'"
+              [matTooltipShowDelay]="500"
+              [matTooltipHideDelay]="500"
+              >done_all</mat-icon
+            ></ng-template
           >
           <div class="list-menu">
             <ng-container *ngFor="let list of dataFromLists; let i = index">
@@ -197,6 +236,11 @@
                     mat-icon-button
                     *ngIf="currentParams.listId === list._id"
                     (click)="changeListState(list)"
+                    matTooltip="Mark as in-progress"
+                    i18n-matTooltip="'@@Mark as in-progress'"
+                    [matTooltipPosition]="'above'"
+                    [matTooltipShowDelay]="500"
+                    [matTooltipHideDelay]="500"
                   >
                     <mat-icon>work_outline</mat-icon>
                   </button>
@@ -206,6 +250,11 @@
                     (click)="
                       deleteModeIsOn = true; deleteModeIsOnFor = list._id
                     "
+                    matTooltip="Delete"
+                    i18n-matTooltip="@@Delete"
+                    [matTooltipPosition]="'above'"
+                    [matTooltipShowDelay]="500"
+                    [matTooltipHideDelay]="500"
                   >
                     <mat-icon>delete</mat-icon>
                   </button>
@@ -220,6 +269,11 @@
                     (click)="deleteListById(list._id)"
                     mat-icon-button
                     color="warn"
+                    matTooltip="Confirm deletion"
+                    i18n-matTooltip="'@@ConfirmDeletion'"
+                    [matTooltipPosition]="'above'"
+                    [matTooltipShowDelay]="500"
+                    [matTooltipHideDelay]="500"
                   >
                     <mat-icon>delete</mat-icon>
                   </button>
@@ -249,32 +303,47 @@
             [class.complete]="task.done === true"
             class="task"
           >
-            <div class="task-data-container">
+            <div #data class="task-data-container">
               <div class="task-data-title-date">
                 <p>{{ task.title }}</p>
                 <p [ngStyle]="checkDate(task.dueDate)">
                   {{ task.dueDate | date : "MMM d, y, H:mm" }}
                 </p>
               </div>
-              <p
+              <div
+                *ngIf="task.note"
                 #note
                 class="note"
-                [matTooltipDisabled]="!task.note || note.offsetWidth < 207"
-                [matTooltip]="task.note ? task.note : 'test'"
+                [matTooltipDisabled]="!(note.clientWidth < note.scrollWidth)"
+                [matTooltip]="task.note"
                 matTooltipPosition="above"
                 matTooltipShowDelay="500"
+                matTooltipHideDelay="500"
               >
                 {{ task.note }}
-              </p>
+              </div>
             </div>
             <div class="task-action-buttons">
               <button
                 mat-icon-button
                 [routerLink]="['/edit-task', currentParams.listId, task._id]"
+                matTooltip="Edit"
+                i18n-matTooltip="@@Edit"
+                [matTooltipPosition]="'above'"
+                [matTooltipShowDelay]="500"
+                [matTooltipHideDelay]="500"
               >
                 <mat-icon color="primary">edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="deleteTask(task._id)">
+              <button
+                mat-icon-button
+                (click)="deleteTask(task._id)"
+                matTooltip="Delete"
+                i18n-matTooltip="@@Delete"
+                [matTooltipPosition]="'above'"
+                [matTooltipShowDelay]="500"
+                [matTooltipHideDelay]="500"
+              >
                 <mat-icon color="warn">delete</mat-icon>
               </button>
             </div>
@@ -293,6 +362,11 @@
         *ngIf="currentParams.listId"
         class="button is-primary add-task-btn"
         (click)="addNewTask()"
+        matTooltip="Add task"
+        i18n-matTooltip="'@@AddTask'"
+        [matTooltipPosition]="'above'"
+        [matTooltipShowDelay]="500"
+        [matTooltipHideDelay]="500"
       >
         <mat-icon>add</mat-icon>
       </button>

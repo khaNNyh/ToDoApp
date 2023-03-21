@@ -2,22 +2,19 @@ import { SnackBarService } from './../shared/snack-bar.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {
-  AfterViewInit,
   Component,
   OnChanges,
   OnInit,
   SimpleChanges,
   ChangeDetectorRef,
-  ViewChild,
   ElementRef,
   QueryList,
   ViewChildren,
-  AfterContentInit,
-  AfterContentChecked,
   AfterViewChecked,
 } from '@angular/core';
 import { list, task } from 'src/app/models/task-model';
 import { TaskService } from 'src/app/services/task.service';
+import { messages } from '../shared/messages';
 
 @Component({
   selector: 'app-task-view',
@@ -109,15 +106,9 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewChecked {
     if (list.done === false) {
       list.done = true;
       this.taskService.patchList(currentListId, list).subscribe();
-      // if (task.subtasks?.length !== 0) {
-      //   task.subtasks?.forEach((subtask) => (subtask.done = true));
-      // }
     } else {
       list.done = false;
       this.taskService.patchList(currentListId, list).subscribe();
-      // if (task.subtasks) {
-      //   task.subtasks?.forEach((subtask) => (subtask.done = false));
-      // }
     }
   }
 
@@ -129,34 +120,17 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewChecked {
     const currentListId = this.currentParams.listId;
     if (task.done === false) {
       task.done = true;
-      console.log(this.dataFromTasks);
       this.taskService.patchTask(currentListId, task._id, task).subscribe();
-      // if (task.subtasks?.length !== 0) {
-      //   task.subtasks?.forEach((subtask) => (subtask.done = true));
-      // }
     } else {
       task.done = false;
       this.taskService.patchTask(currentListId, task._id, task).subscribe();
-      // if (task.subtasks) {
-      //   task.subtasks?.forEach((subtask) => (subtask.done = false));
-      // }
     }
   }
 
-  // changeSubtaskState(subtask: task) {
-  //   if (subtask.done === taskState.NOTDONE) {
-  //     subtask.state = taskState.DONE;
-  //   } else {
-  //     subtask.state = taskState.NOTDONE;
-  //   }
-  // }
-
   deleteListById(idList: string) {
     this.taskService.deleteList(idList).subscribe(() => {
-      this.snackBar.openOK('Deletion successful');
-      // this.taskService.deleteTasks(idList).subscribe({
+      this.snackBar.openOK(messages.DeletionSuccessful);
       this.getTaskLists(), (this.dataFromTasks = []);
-      // });
     });
   }
 
@@ -166,10 +140,10 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewChecked {
 
   addNewTask() {
     this.taskService
-      .createTask(this.currentParams.listId, 'New task')
+      .createTask(this.currentParams.listId, messages.NewTask)
       .subscribe(() => {
         this.getAllTasksByListId(this.currentParams.listId),
-          this.snackBar.openOK('New task has been added!');
+          this.snackBar.openOK(messages.NewTaskAdded);
       });
   }
 
@@ -208,13 +182,15 @@ export class TaskViewComponent implements OnInit, OnChanges, AfterViewChecked {
     };
 
     const tempDays = new Date(taskDate);
-    const remaining = this.todaysDate.getDate() - tempDays.getDate();
-    // const remDays = (remaining / (1000 * 3600 * 24)) as number;
+    const remaining = tempDays.getDate() - this.todaysDate.getDate();
     const remDays = remaining as number;
-    if (remDays <= 1) {
-      return remind1;
-    } else if (remDays <= 6) {
-      return remind2;
-    } else return classic;
+    switch (true) {
+      case remDays <= 1:
+        return remind1;
+      case remDays <= 6:
+        return remind2;
+      default:
+        return classic;
+    }
   }
 }

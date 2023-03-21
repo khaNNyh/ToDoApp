@@ -1,8 +1,8 @@
 import { SnackBarService } from './../shared/snack-bar.service';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormControl, FormBuilder } from '@angular/forms';
 import { TaskService } from 'src/app/services/task.service';
+import { messages } from '../shared/messages';
 
 @Component({
   selector: 'app-new-list',
@@ -11,8 +11,6 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class NewListComponent implements OnInit {
   constructor(
-    private http: HttpClient,
-    private _formBuilder: FormBuilder,
     private taskService: TaskService,
     private snackBar: SnackBarService
   ) {}
@@ -31,7 +29,7 @@ export class NewListComponent implements OnInit {
     if (this.newListName.value) {
       this.taskService
         .createList(this.newListName.value)
-        .subscribe(() => this.snackBar.openOK('New list has been added!'));
+        .subscribe(() => this.snackBar.openOK(messages.NewListAdded));
     }
   }
 }

@@ -18,6 +18,7 @@ import {
 import { Params, ActivatedRoute } from '@angular/router';
 import { task } from 'src/app/models/task-model';
 import { TaskService } from 'src/app/services/task.service';
+import { messages } from '../shared/messages';
 
 @Component({
   selector: 'app-edit-task',
@@ -70,6 +71,6 @@ export class TaskEditComponent implements OnInit {
         this.currentParams.taskId,
         finalTask
       )
-      .subscribe(() => this.snackBar.openOK('Edit successful'));
+      .subscribe(() => this.snackBar.openOK(messages.EditSuccessful));
   }
 }

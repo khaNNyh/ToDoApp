@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { TaskService } from 'src/app/services/task.service';
+import { messages } from '../shared/messages';
 
 @Component({
   selector: 'app-edit-list',
@@ -43,6 +44,6 @@ export class EditListComponent implements OnInit {
         title: this.newListName.value,
         color: this.colorCtr.value,
       })
-      .subscribe(() => this.snackBar.openOK('Edit successful'));
+      .subscribe(() => this.snackBar.openOK(messages.EditSuccessful));
   }
 }
