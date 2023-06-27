@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./signup-page.component.scss'],
 })
 export class SignupPageComponent {
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   loginField = new FormControl<string>('', Validators.required);
   passwordField = new FormControl<string>('', Validators.required);
@@ -19,6 +20,12 @@ export class SignupPageComponent {
         this.loginField.value as string,
         this.passwordField.value as string
       )
-      .subscribe();
+      .subscribe(() => {
+        this.router.navigate(['/lists']);
+      })
+      .add(() => {
+        this.loginField.setErrors({ wrong: true });
+        this.passwordField.setValue('');
+      });
   }
 }

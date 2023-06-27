@@ -2,6 +2,7 @@
   "locale": "pl-PL",
   "translations": {
     "AccessAcc": "Uzyskaj dostęp do konta",
+    "AccountFound": "E-mail w użyciu",
     "AccountNotFound": "Nieprawidłowe dane logowania",
     "Add": "Dodaj",
     "AddTask'": "Dodaj zadanie",

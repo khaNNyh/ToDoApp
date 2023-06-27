@@ -11,6 +11,9 @@
             type="email"
             placeholder="Email"
           />
+          <mat-error i18n="@@AccountFound" *ngIf="loginField.hasError('wrong')">
+            E-mail already used
+          </mat-error>
         </mat-form-field>
       </div>
       <div>
