@@ -305,7 +305,24 @@
           >
             <div #data class="task-data-container">
               <div class="task-data-title-date">
-                <p>{{ task.title }}</p>
+                <p
+                  #title
+                  [ngStyle]="
+                    task.note
+                      ? { 'max-width': '15rem' }
+                      : { 'max-width': '24rem' }
+                  "
+                  class="task-title"
+                  [matTooltipDisabled]="
+                    !(title.clientWidth < title.scrollWidth)
+                  "
+                  [matTooltip]="task.title"
+                  matTooltipPosition="above"
+                  matTooltipShowDelay="500"
+                  matTooltipHideDelay="500"
+                >
+                  {{ task.title }}
+                </p>
                 <p [ngStyle]="checkDate(task.dueDate)">
                   {{ task.dueDate | date : "MMM d, y, H:mm" }}
                 </p>

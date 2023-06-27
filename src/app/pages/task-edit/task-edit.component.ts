@@ -1,22 +1,7 @@
 import { SnackBarService } from './../shared/snack-bar.service';
-import { HttpClient } from '@angular/common/http';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  FormGroup,
-  Validators,
-  FormControl,
-  FormBuilder,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormControl } from '@angular/forms';
 import { Params, ActivatedRoute } from '@angular/router';
-import { task } from 'src/app/models/task-model';
 import { TaskService } from 'src/app/services/task.service';
 import { messages } from '../shared/messages';
 
@@ -28,7 +13,6 @@ import { messages } from '../shared/messages';
 export class TaskEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private _formBuilder: FormBuilder,
     private taskService: TaskService,
     private snackBar: SnackBarService
   ) {}
@@ -49,7 +33,7 @@ export class TaskEditComponent implements OnInit {
     this.taskService
       .getTaskById(this.currentParams.listId, this.currentParams.taskId)
       .subscribe((response) => {
-        //workaround casue of fake backend
+        //workaround cause of fake backend
         let responseTask: any;
         responseTask = response;
         this.task = responseTask[0];
