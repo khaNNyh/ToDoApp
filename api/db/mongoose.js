@@ -4,14 +4,14 @@ const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect("mongodb://localhost:27017/TaskManager", {
+  .connect("mongodb://127.0.0.1:27017/TaskManager", {
     useNewUrlParser: true,
   })
   .then(() => {
     console.log("Connected");
   })
   .catch((e) => {
-    console.log("Error");
+    console.log("Error", e);
   });
 
 // mongoose.set("useNewUrlParser", true);
