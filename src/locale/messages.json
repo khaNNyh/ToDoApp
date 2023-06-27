@@ -2,6 +2,7 @@
   "locale": "en",
   "translations": {
     "AccessAcc": " Access your account ",
+    "AccountNotFound": " Incorrect login credentials ",
     "Add": " Add ",
     "AddTask'": "Add task",
     "AlreadyHaveAcc": "Already have an account?",

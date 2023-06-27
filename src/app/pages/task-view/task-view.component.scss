@@ -85,6 +85,13 @@
     display: flex;
   }
 
+  .task-title {
+    max-width: 15rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   .task {
     padding: 0.5rem 0.5rem;
     border-radius: 5px;

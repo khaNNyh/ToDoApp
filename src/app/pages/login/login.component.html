@@ -13,6 +13,12 @@
             placeholder="Email"
           />
         </div>
+        <mat-error
+          i18n="@@AccountNotFound"
+          *ngIf="loginField.hasError('wrong')"
+        >
+          Incorrect login credentials
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <div>

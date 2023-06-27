@@ -22,13 +22,13 @@ export class LoginComponent {
         this.passwordField.value as string
       )
       .subscribe((res: HttpResponse<any>) => {
-        if (res.status === 200) {
-          //ok
-          this.router.navigate(['/lists']);
-        } else {
-          this.loginField.setErrors({});
-          this.passwordField.setValue('');
-        }
+        //ok
+        this.router.navigate(['/lists']);
+      })
+      .add(() => {
+        console.log('error');
+        this.loginField.setErrors({ wrong: true });
+        this.passwordField.setValue('');
       });
   }
 }
