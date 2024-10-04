@@ -1,10 +1,15 @@
 # ToDoApp
+![image](https://github.com/user-attachments/assets/1a84b545-d7aa-4ef5-8b50-f07e2c9824a9)
+![image](https://github.com/user-attachments/assets/f870252c-ef91-44b2-b473-01a63b2a2893)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `nodemon app.js`
+MongoDB Compass
+![image](https://github.com/user-attachments/assets/dcf4a1fe-9a34-438a-878b-b3a63d2d7e89)
 
 ## Code scaffolding
 
